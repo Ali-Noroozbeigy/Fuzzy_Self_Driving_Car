@@ -45,6 +45,9 @@ class FuzzyGasController:
     def far(self, x):
         if 90 <= x <= 200:
             return (1/110) * x - (9/11)
+        if x > 200:
+            return 1
+        return 0
 
     def inference(self, f_memship):
         self.inference_results = {
