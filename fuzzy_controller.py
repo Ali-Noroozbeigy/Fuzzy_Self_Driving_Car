@@ -35,3 +35,23 @@ class FuzzyController:
         if 50 <= x <= 100:
             return (1/50) * x - 1
         return 0
+
+    def membership_degree_right(self, right_dist):
+        pass
+
+    def close_R(self,x):
+        if 0 <= x <= 50:
+            return (-1/50) * x + 1
+        return 0
+
+    def moderate_R(self, x):
+        if 35 <= x <= 50:
+            return (1/15) * x - (7/3)
+        if 50 < x <= 65:
+            return (-1/15) * x + (13/3)
+        return 0
+
+    def far_R(self, x):
+        if 50 <= x <= 100:
+            return (1/50) * x - 1
+        return 0
