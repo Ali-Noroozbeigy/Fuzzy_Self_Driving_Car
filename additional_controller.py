@@ -5,7 +5,7 @@ class FuzzyGasController:
     """
 
     def __init__(self):
-        pass
+        self.inference_results = None
         
 
     def decide(self, center_dist):
@@ -36,3 +36,10 @@ class FuzzyGasController:
     def far(self, x):
         if 90 <= x <= 200:
             return (1/110) * x - (9/11)
+
+    def inference(self, f_memship):
+        self.inference_results = {
+            'low': f_memship['close'],
+            'medium': f_memship['moderate'],
+            'high': f_memship['far']
+        }
