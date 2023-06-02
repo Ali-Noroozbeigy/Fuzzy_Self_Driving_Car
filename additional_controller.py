@@ -43,3 +43,23 @@ class FuzzyGasController:
             'medium': f_memship['moderate'],
             'high': f_memship['far']
         }
+
+    def low(self, x):
+        if 0 <= x <= 5:
+            return (1/5) * x
+        if 5 < x <= 10:
+            return (-1/5) * x + 2
+        return 0
+
+    def medium(self, x):
+        if 0 <= x <=15:
+            return (1/15) * x
+        if 15 < x <= 30:
+            return (-1/15) * x + 2
+        return 0
+
+    def high(self, x):
+        if 25 <= x <= 30:
+            return (1/5) * x - 5
+        if 30 < x <= 90:
+            return (-1/60) * x + 1.5
