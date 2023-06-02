@@ -71,3 +71,20 @@ class FuzzyGasController:
         if 30 < x <= 90:
             return (-1/60) * x + 1.5
         return 0
+
+    def centroid(self):
+        numerator = 0.0
+        denominator = 0.0
+
+        step = 90 / 999
+        x = [0 + i * step for i in range(1000)]
+        delta = x[1] - x[0]
+        for i in x:
+            u = self.max_gas(i)
+            numerator += u * i * delta
+            denominator += u * delta
+
+        center = 0.0
+        if denominator != 0:
+            center = 1.0 * float(numerator) / float(denominator)
+        return center
