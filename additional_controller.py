@@ -44,6 +44,13 @@ class FuzzyGasController:
             'high': f_memship['far']
         }
 
+    def max_gas(self, x):
+        return max(
+            min(self.low(x), self.inference_results['low']),
+            min(self.medium(x), self.inference_results['medium']),
+            min(self.high(x), self.inference_results['high'])
+        )
+
     def low(self, x):
         if 0 <= x <= 5:
             return (1/5) * x
@@ -63,3 +70,4 @@ class FuzzyGasController:
             return (1/5) * x - 5
         if 30 < x <= 90:
             return (-1/60) * x + 1.5
+        return 0
