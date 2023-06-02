@@ -102,3 +102,6 @@ class FuzzyController:
         if 20 < x <= 50:
             return (-1/30)* x + (5/3)
         return 0
+
+    def function_up_to(self, func, x, u):
+        return min(func(x), u)
