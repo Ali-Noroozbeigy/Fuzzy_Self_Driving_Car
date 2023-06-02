@@ -67,3 +67,38 @@ class FuzzyController:
             'high_left': min(l_memship['far_L'], r_memship['close_R']),
             'nothing': min(l_memship['moderate_L'], r_memship['moderate_R'])
         }
+
+    def high_right(self, x):
+        if -50 <= x <= -20:
+            return (1/30) * x + (5/3)
+        if -20 < x <= -5:
+            return (-1/15) * x - (1/3)
+        return 0
+
+    def low_right(self, x):
+        if -20 <= x <= -10:
+            return (1/10) * x + 2
+        if -10 < x <= 0:
+            return (-1/10) * x
+        return 0
+
+    def nothing(self, x):
+        if -10 <= x <= 0:
+            return (1/10) * x + 1
+        if 0 < x <= 10:
+            return (-1/10) * x + 1
+        return 0
+
+    def low_left(self, x):
+        if 0<= x <= 10:
+            return (1/10) * x
+        if 10 < x <= 20:
+            return (-1/10) * x + 2
+        return 0
+
+    def high_left(self, x):
+        if 5 <= x <= 20:
+            return (1/15) * x - (1/3)
+        if 20 < x <= 50:
+            return (-1/30)* x + (5/3)
+        return 0
