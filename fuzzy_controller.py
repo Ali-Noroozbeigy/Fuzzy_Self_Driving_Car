@@ -57,3 +57,13 @@ class FuzzyController:
         if 50 <= x <= 100:
             return (1/50) * x - 1
         return 0
+
+    def inference(self, l_memship, r_memship):
+
+        return {
+            'low_right': min(l_memship['close_L'], r_memship['moderate_R']),
+            'high_right': min(l_memship['close_L'], r_memship['far_R']),
+            'low_left': min(l_memship['moderate_L'], r_memship['close_R']),
+            'high_left': min(l_memship['far_L'], r_memship['close_R']),
+            'nothing': min(l_memship['moderate_L'], r_memship['moderate_R'])
+        }
