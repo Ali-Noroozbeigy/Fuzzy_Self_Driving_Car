@@ -37,7 +37,9 @@ class FuzzyController:
         return 0
 
     def membership_degree_right(self, right_dist):
-        pass
+        return {'close_R': self.close_R(right_dist),
+                'moderate_R': self.moderate_R(right_dist),
+                'far_R': self.far_R(right_dist)}
 
     def close_R(self,x):
         if 0 <= x <= 50:
