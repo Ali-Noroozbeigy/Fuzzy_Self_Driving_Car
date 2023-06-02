@@ -5,14 +5,23 @@ class FuzzyController:
     """
 
     def __init__(self):
-        self.inference_result = None
-
+        self.inference_results = None
 
     def decide(self, left_dist,right_dist):
         """
         main method for doin all the phases and returning the final answer for rotation
         """
-        return 0
+        # phase 1: fuzzification
+        l_memship = self.membership_degree_left(left_dist)
+        r_memship = self.membership_degree_right(right_dist)
+
+        # phase 2: inference
+        self.inference(l_memship, r_memship)
+
+        # phase 3: defuzzification
+        center_of_gravity = self.centroid()
+
+        return center_of_gravity
 
     def membership_degree_left(self, left_dist):
         return {'close_L': self.close_L(left_dist),
@@ -60,7 +69,7 @@ class FuzzyController:
 
     def inference(self, l_memship, r_memship):
 
-        self.inference_result = {
+        self.inference_results = {
             'low_right': min(l_memship['close_L'], r_memship['moderate_R']),
             'high_right': min(l_memship['close_L'], r_memship['far_R']),
             'low_left': min(l_memship['moderate_L'], r_memship['close_R']),
