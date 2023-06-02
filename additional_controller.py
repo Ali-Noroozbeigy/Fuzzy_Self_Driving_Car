@@ -12,7 +12,16 @@ class FuzzyGasController:
         """
         main method for doin all the phases and returning the final answer for gas
         """
-        return 30
+        # phase 1: fuzzification
+        f_memship = self.membership_degree_front(center_dist)
+
+        # phase 2: inference
+        self.inference(f_memship)
+
+        # phase 3: defuzzification
+        center_of_gravity = self.centroid()
+
+        return center_of_gravity
 
     def membership_degree_front(self, front_distance):
         return {
