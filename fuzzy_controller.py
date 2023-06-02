@@ -68,6 +68,15 @@ class FuzzyController:
             'nothing': min(l_memship['moderate_L'], r_memship['moderate_R'])
         }
 
+    def max_rotate(self, x, inference_results):
+        return max(
+            min(self.high_right(x), inference_results['high_right']),
+            min(self.low_right(x), inference_results['low_right']),
+            min(self.low_left(x), inference_results['low_left']),
+            min(self.high_left(x), inference_results['high_left']),
+            min(self.nothing(x), inference_results['nothing'])
+        )
+
     def high_right(self, x):
         if -50 <= x <= -20:
             return (1/30) * x + (5/3)
@@ -102,6 +111,3 @@ class FuzzyController:
         if 20 < x <= 50:
             return (-1/30)* x + (5/3)
         return 0
-
-    def function_up_to(self, func, x, u):
-        return min(func(x), u)
