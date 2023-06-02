@@ -5,7 +5,7 @@ class FuzzyController:
     """
 
     def __init__(self):
-        pass
+        self.inference_result = None
 
 
     def decide(self, left_dist,right_dist):
@@ -60,7 +60,7 @@ class FuzzyController:
 
     def inference(self, l_memship, r_memship):
 
-        return {
+        self.inference_result = {
             'low_right': min(l_memship['close_L'], r_memship['moderate_R']),
             'high_right': min(l_memship['close_L'], r_memship['far_R']),
             'low_left': min(l_memship['moderate_L'], r_memship['close_R']),
@@ -68,13 +68,13 @@ class FuzzyController:
             'nothing': min(l_memship['moderate_L'], r_memship['moderate_R'])
         }
 
-    def max_rotate(self, x, inference_results):
+    def max_rotate(self, x):
         return max(
-            min(self.high_right(x), inference_results['high_right']),
-            min(self.low_right(x), inference_results['low_right']),
-            min(self.low_left(x), inference_results['low_left']),
-            min(self.high_left(x), inference_results['high_left']),
-            min(self.nothing(x), inference_results['nothing'])
+            min(self.high_right(x), self.inference_results['high_right']),
+            min(self.low_right(x), self.inference_results['low_right']),
+            min(self.low_left(x), self.inference_results['low_left']),
+            min(self.high_left(x), self.inference_results['high_left']),
+            min(self.nothing(x), self.inference_results['nothing'])
         )
 
     def high_right(self, x):
@@ -111,3 +111,20 @@ class FuzzyController:
         if 20 < x <= 50:
             return (-1/30)* x + (5/3)
         return 0
+
+    def centroid(self):
+        numerator = 0.0
+        denominator = 0.0
+
+        step = 100 / 999
+        x = [-50 + i * step for i in range(1000)]
+        delta = x[1] - x[0]
+        for i in x:
+            u = self.max_rotate(i)
+            numerator += u * i * delta
+            denominator += u * delta
+
+        center = 0.0
+        if denominator != 0:
+            center = 1.0 * float(numerator) / float(denominator)
+        return center
